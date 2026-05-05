@@ -15,10 +15,15 @@ A cross-platform, idempotent bootstrap repository for quickly setting up a devel
 
 ## Usage
 
+You can now use this command to set up any new VM:
+```bash
+git clone https://github.com/jstango/kickstart.git ~/kickstart && cd ~/kickstart && ./bootstrap.sh
+```
+
 1.  **Log into your new VM.**
 2.  **Clone this repository:**
     ```bash
-    git clone https://github.com/YOUR_USERNAME/kickstart.git ~/kickstart
+    git clone https://github.com/jstango/kickstart.git ~/kickstart
     ```
 3.  **Run the bootstrap script:**
     ```bash
