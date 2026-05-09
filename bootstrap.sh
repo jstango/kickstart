@@ -166,6 +166,15 @@ add_to_bashrc() {
     fi
 }
 
+# Prompt for Gemini API Key
+if ! grep -qF "export GEMINI_API_KEY=" "$BASHRC"; then
+    echo -ne "\033[1;34m[SETUP]\033[0m Enter your Gemini API key (or press enter to skip): "
+    read -r GEMINI_API_KEY_INPUT
+    if [ -n "$GEMINI_API_KEY_INPUT" ]; then
+        add_to_bashrc "export GEMINI_API_KEY=\"$GEMINI_API_KEY_INPUT\""
+    fi
+fi
+
 add_to_bashrc 'eval "$(starship init bash)"'
 add_to_bashrc "alias ls='eza --icons'"
 add_to_bashrc "alias ll='eza -lh --icons'"
