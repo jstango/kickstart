@@ -139,12 +139,22 @@ fi
 log "Setting up configurations..."
 
 mkdir -p ~/.config
+mkdir -p ~/.config/nvim
 
 # Symlink configs from repo
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 ln -sf "$REPO_DIR/config/starship.toml" ~/.config/starship.toml
 ln -sf "$REPO_DIR/config/.tmux.conf" ~/.tmux.conf
+ln -sf "$REPO_DIR/config/nvim/init.lua" ~/.config/nvim/init.lua
+
+# Install Neovim Tokyonight theme
+TOKYONIGHT_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/pack/themes/start/tokyonight.nvim"
+if [ ! -d "$TOKYONIGHT_DIR" ]; then
+    log "Installing Tokyonight colorscheme for Neovim..."
+    mkdir -p "$(dirname "$TOKYONIGHT_DIR")"
+    git clone https://github.com/folke/tokyonight.nvim.git "$TOKYONIGHT_DIR"
+fi
 
 # Update .bashrc
 BASHRC="$HOME/.bashrc"
