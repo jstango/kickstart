@@ -46,6 +46,11 @@ case "$OS" in
         INSTALL_CMD="sudo dnf install -y"
         UPDATE_CMD="sudo dnf check-update || true"
         ;;
+    slackware|unraid)
+        PKG_MGR="slackpkg"
+        INSTALL_CMD="sudo slackpkg -batch=on -default_answer=y install"
+        UPDATE_CMD="sudo slackpkg update"
+        ;;
     *)
         warn "Unsupported or untested OS: $OS. Skipping system package manager checks."
         PKG_MGR="none"
