@@ -84,6 +84,16 @@ if [ "$OS" == "ubuntu" ] || [ "$OS" == "debian" ]; then
         echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list
         sudo apt-get update
     fi
+elif [ "$OS" == "slackware" ] || [ "$OS" == "unraid" ]; then
+    # eza is usually not in main slackware repos, use slackbuilds or binary
+    if ! check_cmd "eza"; then
+        log "Installing eza binary for Slackware/Unraid..."
+        EZA_VERSION=$(curl -s "https://api.github.com/repos/eza-community/eza/releases/latest" | grep -Po '"tag_name": "v\K[0-9.]+')
+        wget -qO eza.tar.gz "https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-gnu.tar.gz"
+        tar -xzf eza.tar.gz
+        sudo mv eza /usr/local/bin/
+        rm eza.tar.gz
+    fi
 fi
 
 packages=("tmux" "nvim" "curl" "git" "nvtop" "eza")
