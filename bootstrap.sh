@@ -47,10 +47,10 @@ case "$OS" in
         UPDATE_CMD="sudo dnf check-update || true"
         ;;
     *)
-        warn "Unsupported or untested OS: $OS. Attempting to use 'apt-get' as fallback."
-        PKG_MGR="apt-get"
-        INSTALL_CMD="sudo apt-get install -y"
-        UPDATE_CMD="sudo apt-get update"
+        warn "Unsupported or untested OS: $OS. Skipping system package manager checks."
+        PKG_MGR="none"
+        INSTALL_CMD=":"
+        UPDATE_CMD=":"
         ;;
 esac
 
